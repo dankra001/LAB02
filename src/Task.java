@@ -43,7 +43,7 @@ public class Task {
 
     public void setTaskDateTimeStop(LocalDateTime taskDateTimeStop) { this.taskDateTimeStop = taskDateTimeStop; }
 
-    @Override  //nadpisanie, toString
+    @Override
     public String toString(){
         String output = "";
         output += "Task Name = " + taskName + '\n';
@@ -53,6 +53,18 @@ public class Task {
         output += "Task Stop = " + taskDateTimeStop + '\n';
         return output;
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
 
 

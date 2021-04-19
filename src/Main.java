@@ -14,8 +14,8 @@ public class Main {
 //zadanie 2
 
         System.out.println("_________________________________________________");
-        System.out.println("Zadanie 2");
-        System.out.println("-------------------------------------------------");
+        System.out.println("Zadanie 2 LAB01");
+        System.out.println("-------------------------------------------------"+'\n');
 
         Task task1 = new Task("Example1",
                 "Description1",
@@ -39,8 +39,8 @@ public class Main {
         //zadanie 3
 
         System.out.println("_________________________________________________");
-        System.out.println("Zadanie 3");
-        System.out.println("-------------------------------------------------");
+        System.out.println("Zadanie 3 LAB01");
+        System.out.println("-------------------------------------------------"+'\n');
 
         Task task4 = new Task("Example4",
                 "Description4",
@@ -63,8 +63,8 @@ public class Main {
 
         Task[] tasks = {task1,task2,task3,task4};
     System.out.println("_________________________________________________");
-    System.out.println("Zadanie 4 - Tablica");
-    System.out.println("-------------------------------------------------");
+    System.out.println("Zadanie 4 LAB01 - Tablica");
+    System.out.println("-------------------------------------------------"+'\n');
 
 
         for(int i=0; i< tasks.length; i++) {
@@ -72,8 +72,8 @@ public class Main {
         }
 
         System.out.println("_________________________________________________");
-        System.out.println("Zadanie 4 - Lista");
-        System.out.println("-------------------------------------------------");
+        System.out.println("Zadanie 4 LAB02 - Lista");
+        System.out.println("-------------------------------------------------"+'\n');
 
         //lista tasków
 
@@ -84,7 +84,155 @@ public class Main {
         taskslista.add(task4);
 
         System.out.println(taskslista);
+
+        // LAB02 DZIEDZICZENIE, POLIMORFIZM
+        // Cwiczenie 1
+
+        System.out.println("_________________________________________________");
+        System.out.println("Zadanie 1 LAB02");
+        System.out.println("-------------------------------------------------"+'\n');
+
+        Subtask subtask = new Subtask("Example 1",
+                "Description 1",
+                CategoryEnum.NEW,
+                LocalDateTime.parse(dateStr1, formatter),
+                "subtask1");
+        System.out.println(subtask);
+
+
+        // Cwiczenie 2
+
+
+        System.out.println("_________________________________________________");
+        System.out.println("Zadanie 2 LAB02");
+        System.out.println("-------------------------------------------------"+'\n');
+
+        Task subtask11 = new Subtask("Example11",                                       //Polimorfizm, typ Task
+                "Description11",
+                CategoryEnum.NEW,
+                LocalDateTime.parse(dateStr1, formatter), "subtask11");
+
+        Task subtask22 = new Subtask("Example22",
+                "Description22",
+                CategoryEnum.NEW,
+                LocalDateTime.parse(dateStr1, formatter), "subtask22");
+
+        Task subtask33 = new Subtask("Example33",
+                "Description33",
+                CategoryEnum.NEW,
+                LocalDateTime.parse(dateStr1, formatter), "subtask33");
+
+        Task task44 = new Task("Example44",
+                "Description44",
+                CategoryEnum.NEW,
+                LocalDateTime.parse(dateStr1, formatter));
+
+        Task task55 = new Task("Example55",
+                "Description55",
+                CategoryEnum.NEW,
+                LocalDateTime.parse(dateStr1, formatter));
+
+        Task task66 = new Task("Example66",
+                "Description66",
+                CategoryEnum.NEW,
+                LocalDateTime.parse(dateStr1, formatter));
+
+
+        System.out.println(subtask11);
+        System.out.println(subtask22);
+        System.out.println(subtask33);
+        System.out.println(task44);
+        System.out.println(task55);
+        System.out.println(task66);
+
+
+        //Cwiczenie 3
+
+        System.out.println("_________________________________________________");
+        System.out.println("Zadanie 3 LAB02");
+        System.out.println("-------------------------------------------------"+'\n');
+
+
+        Object subtask111 = new Subtask("Example111",                                   //Polimorfizm, typ Object
+                "Description111",
+                CategoryEnum.NEW,
+                LocalDateTime.parse(dateStr1, formatter), "subtask111");
+
+        Object subtask222 = new Subtask("Example222",
+                "Description222",
+                CategoryEnum.NEW,
+                LocalDateTime.parse(dateStr1, formatter), "subtask222");
+
+        Object subtask333 = new Subtask("Example333",
+                "Description333",
+                CategoryEnum.NEW,
+                LocalDateTime.parse(dateStr1, formatter), "subtask333");
+
+        Object task444 = new Task("Example444",
+                "Description444",
+                CategoryEnum.NEW,
+                LocalDateTime.parse(dateStr1, formatter));
+
+        Object task555 = new Task("Example555",
+                "Description555",
+                CategoryEnum.NEW,
+                LocalDateTime.parse(dateStr1, formatter));
+
+        Object task666 = new Task("Example666",
+                "Description666",
+                CategoryEnum.NEW,
+                LocalDateTime.parse(dateStr1, formatter));
+
+
+        System.out.println(subtask111);
+        System.out.println(subtask222);
+        System.out.println(subtask333);
+        System.out.println(task444);
+        System.out.println(task555);
+        System.out.println(task666);
+
+
+        //Cwiczenie 4 getDetailInfo
+
+        System.out.println("_________________________________________________");
+        System.out.println("Zadanie 4 LAB02");
+        System.out.println("-------------------------------------------------"+'\n');
+
+
+        getDetailInfo(subtask222);                                                      //przykład z subtaskTitle
+        getDetailInfo(task55);                                                          //przykład B/D
     }
+
+    public static void getDetailInfo(Object o){
+        String infos = "";
+        if(o.getClass() == Task.class || o.getClass() == Subtask.class) {               //sprawdzanie czy obiekt jest typu task   || alternatywa - false tylko wtedy, gdy oba warunki będą false
+            Task task = (Task) o;                                                       //rzutowanie przez Object.
+
+            String subtaskName = null;
+            if (task.getClass() == Subtask.class)
+                subtaskName = ((Subtask) task).getSubtaskName();
+            infos += getLine("taskName", task.getTaskName())
+                    + getLine("taskDescription", task.getTaskDescription())
+                    + getLine("taskCategory", task.getTaskCategory())
+                    + getLine("taskDateTimeStart", task.getTaskDateTimeStart())
+                    + getLine("taskDateTimeStop", task.getTaskDateTimeStop())
+                    + getLine("subtaskTitle", subtaskName);
+        }
+        System.out.println(infos);
+
+    }
+
+    private static String getLine(String name, Object value){
+        int fieldSpace = 35;
+        String spaces = "                                   ";
+        String valueStr = "B/D";
+        if(null != value) {
+            valueStr = value.toString();
+        }
+        return '|' + name + spaces.substring(0,fieldSpace-name.length()) + '|'
+                + valueStr + spaces.substring(0,fieldSpace-valueStr.length()) + '|'+ '\n';
+    }
+
 
 
 }
