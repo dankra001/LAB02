@@ -222,7 +222,7 @@ public class Main {
 
     }
 
-    private static String getLine(String name, Object value){
+    private static String getLine(String name, Object value){                               //format danych z tymi samymi odleglosciami
         int fieldSpace = 35;
         String spaces = "                                   ";
         String valueStr = "B/D";
